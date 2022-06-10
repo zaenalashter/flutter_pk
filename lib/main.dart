@@ -37,6 +37,11 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _soalIndex += 1;
     });
+    if (_soalIndex < pertanyaan.length) {
+      print('Benar!');
+    } else {
+      print('Salah!');
+    }
     print(_soalIndex);
   }
 
@@ -47,15 +52,19 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Aplikasi Kuis'),
         ),
-        body: Column(
-          children: [
-            Pertanyaan(pertanyaan[_soalIndex]['pertanyaan']),
-            ...(pertanyaan[_soalIndex]['jawaban'] as List<String>)
-                .map((jawabanText) {
-              return Jawaban(_jawaban, jawabanText);
-            }).toList(),
-          ],
-        ),
+        body: _soalIndex < pertanyaan.length
+            ? Column(
+                children: [
+                  Pertanyaan(pertanyaan[_soalIndex]['pertanyaan']),
+                  ...(pertanyaan[_soalIndex]['jawaban'] as List<String>)
+                      .map((jawabanText) {
+                    return Jawaban(_jawaban, jawabanText);
+                  }).toList(),
+                ],
+              )
+            : Center(
+                child: Text('Kamu berhasil menyelesaikan kuis ini'),
+              ),
       ),
     );
   }
