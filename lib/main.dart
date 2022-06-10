@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
                   jawaban: _jawaban,
                   pertanyaan: pertanyaan,
                   soalIndex: _soalIndex)
-              : Hasil()),
+              : Hasil(totalSkor)),
     );
   }
 }
