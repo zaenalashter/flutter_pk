@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class Hasil extends StatelessWidget {
   // const Hasil({Key key}) : super(key: key);
   int totalSkor;
+  Function resetKuis;
 
-  Hasil(this.totalSkor);
+  Hasil(this.totalSkor, this.resetKuis);
 
   //GETTER
   String get hasilText {
@@ -23,11 +24,23 @@ class Hasil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        hasilText,
-        style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-      ),
+    return Column(
+      children: [
+        Center(
+          child: Text(
+            hasilText,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          ),
+        ),
+        TextButton(
+          onPressed: resetKuis,
+          child: Text('Mulai Ulang'),
+          style: TextButton.styleFrom(
+            primary: Colors.blue,
+          ),
+        ),
+      ],
     );
   }
 }

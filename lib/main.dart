@@ -44,6 +44,13 @@ class _MyAppState extends State<MyApp> {
     },
   ];
 
+  void resetKuis() {
+    setState(() {
+      _soalIndex = 0;
+      totalSkor = 0;
+    });
+  }
+
   void _jawaban(int skor) {
     // print('Tombol Jawaban Sudah di Tekan!');
     totalSkor = totalSkor + skor;
@@ -55,16 +62,18 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-          appBar: AppBar(
-            title: Text('Aplikasi Kuis'),
-          ),
-          body: _soalIndex < pertanyaan.length
-              ? Kuis(
-                  jawaban: _jawaban,
-                  pertanyaan: pertanyaan,
-                  soalIndex: _soalIndex)
-              : Hasil(totalSkor)),
+        appBar: AppBar(
+          title: Text('Aplikasi Kuis'),
+        ),
+        body: _soalIndex < pertanyaan.length
+            ? Kuis(
+                jawaban: _jawaban,
+                pertanyaan: pertanyaan,
+                soalIndex: _soalIndex)
+            : Hasil(totalSkor, resetKuis),
+      ),
     );
   }
 }
