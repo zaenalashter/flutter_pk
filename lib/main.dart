@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import './pertanyaan.dart';
-import './jawaban.dart';
+import 'package:flutter_pk/hasil.dart';
+
+import './kuis.dart';
 
 void main() => runApp(MyApp());
 
@@ -49,23 +50,15 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Aplikasi Kuis'),
-        ),
-        body: _soalIndex < pertanyaan.length
-            ? Column(
-                children: [
-                  Pertanyaan(pertanyaan[_soalIndex]['pertanyaan']),
-                  ...(pertanyaan[_soalIndex]['jawaban'] as List<String>)
-                      .map((jawabanText) {
-                    return Jawaban(_jawaban, jawabanText);
-                  }).toList(),
-                ],
-              )
-            : Center(
-                child: Text('Kamu berhasil menyelesaikan kuis ini'),
-              ),
-      ),
+          appBar: AppBar(
+            title: Text('Aplikasi Kuis'),
+          ),
+          body: _soalIndex < pertanyaan.length
+              ? Kuis(
+                  jawaban: _jawaban,
+                  pertanyaan: pertanyaan,
+                  soalIndex: _soalIndex)
+              : Hasil()),
     );
   }
 }
