@@ -20,9 +20,10 @@ class Kuis extends StatelessWidget {
     return Column(
       children: [
         Pertanyaan(pertanyaan[soalIndex]['pertanyaan']),
-        ...(pertanyaan[soalIndex]['jawaban'] as List<String>)
+        ...(pertanyaan[soalIndex]['jawaban'] as List<Map<String, Object>>)
             .map((jawabanText) {
-          return Jawaban(jawaban, jawabanText);
+          return Jawaban(
+              () => jawaban(jawabanText['skor']), jawabanText['teks']);
         }).toList(),
       ],
     );
